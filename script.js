@@ -13,7 +13,7 @@ const searchbar = document.querySelector('.searchbar');
 
 (async function () {
   try {
-    const res = await fetch('/data.json');
+    const res = await fetch('data.json');
     const data = await res.json();
     countries.innerHTML = '';
     const displayCountry = function (country) {
