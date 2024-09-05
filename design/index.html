@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rest Countries API</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="frontBar">
+      <h1 class="title">Where in the world?</h1>
+      <p class="theme">🌜 Dark Mode</p>
+    </div>
+    <section class="page-1">
+      <div class="searching">
+        <input
+          class="searchbar"
+          type="text"
+          placeholder="Search for a country..."
+        />
+        <div class="custom-select">
+          <select class="filter">
+            <option value="" disabled selected hidden>Filter by Region</option>
+            <option>Africa</option>
+            <option>Americas</option>
+            <option>Asia</option>
+            <option>Europe</option>
+            <option>Oceania</option>
+          </select>
+        </div>
+      </div>
+      <div class="countries-grid">
+        <div class="country">
+          <img class="flag" src="images/Flag_of_Germany.svg" />
+          <p class="name">Germany</p>
+          <div class="info">
+            <p>Population: <span class="data">81,770,900</span></p>
+            <p>Region: <span class="data">Europe</span></p>
+            <p>Capital: <span class="data">Berlin</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="country--info hidden">
+      <button class="back-button">🔙 Back</button>
+      <div class="details">
+        <div>
+          <img class="country__flag" src="images/Flag_of_Germany.svg" />
+        </div>
+        <div class="country-details">
+          <h2 class="country__name">Germany</h2>
+          <div class="country-statistics">
+            <div class="first-column">
+              <p>Native Name: <span>germany</span></p>
+              <p>Population: <span>ahmed amr</span></p>
+              <p>Region: <span>Europe</span></p>
+              <p>Sub Region: <span> Western Europe</span></p>
+              <p>Capital: <span>Munich</span></p>
+            </div>
+            <div class="secound-column">
+              <p>Top Level Domain: <span>.be</span></p>
+              <p>Currencies: <span>Euro</span></p>
+              <p>
+                Languages:
+                <span>Arabic,English,German</span>
+              </p>
+            </div>
+          </div>
+          <div class="border-countries">
+            <p>Border Countries:</p>
+            <button class="border-country--btn">Egypt</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
