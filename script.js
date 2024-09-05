@@ -1,13 +1,13 @@
 let data;
 let darkMode = false;
 let pendingData = true;
-const countries = document.querySelector(".countries-grid");
-const btnTheme = document.querySelector(".theme");
+const countries = document.querySelector('.countries-grid');
+const btnTheme = document.querySelector('.theme');
 const body = document.body;
-const header = document.querySelector(".frontBar");
-const searchBar = document.querySelector(".searchbar");
-const filter = document.querySelector(".filter");
-const page1 = document.querySelector(".page-1");
+const header = document.querySelector('.frontBar');
+const searchBar = document.querySelector('.searchbar');
+const filter = document.querySelector('.filter');
+const page1 = document.querySelector('.page-1');
 const page2 = document.querySelector('.country--info');
 const searchbar = document.querySelector('.searchbar');
 
@@ -16,9 +16,7 @@ const searchbar = document.querySelector('.searchbar');
     const res = await fetch('/data.json');
     const data = await res.json();
     countries.innerHTML = '';
-    let index = 0;
     const displayCountry = function (country) {
-      console.log(country);
       let html = ` <button class="back-button">🔙 Back</button>
       <div class="details">
         <div>
@@ -62,14 +60,15 @@ const searchbar = document.querySelector('.searchbar');
       page2.innerHTML = '';
       page2.insertAdjacentHTML('afterbegin', html);
       page2.classList.remove('hidden');
-      const borderContainer = document.querySelector('.border-countries');
+      if (country.borders) {
+        const borderContainer = document.querySelector('.border-countries');
+        borderContainer.addEventListener('click', e => {
+          const name = e.target.textContent;
+          const borCountry = data.find(country => country.name === name);
+          displayCountry(borCountry);
+        });
+      }
       const backBtn = document.querySelector('.back-button');
-      borderContainer.addEventListener('click', e => {
-        const btn = e.target;
-        const name = e.target.textContent;
-        const borCountry = data.find(country => country.name === name);
-        displayCountry(borCountry);
-      });
       backBtn.addEventListener('click', e => {
         page2.classList.add('hidden');
         page1.classList.remove('hidden');
@@ -86,7 +85,7 @@ const searchbar = document.querySelector('.searchbar');
     };
     data.forEach((element, i) => {
       const html = `
-      <div class="country" index=${index++}>
+      <div class="country" index=${i} region=${element.region}>
       <img class="flag" src="${element.flag}" />
       <p class="name">${element.name}</p>
       <div class="info">
@@ -148,6 +147,7 @@ const searchbar = document.querySelector('.searchbar');
       const serCountry = allCountries.find(
         el => el.querySelector('p').textContent.toLowerCase() === serCountryName
       );
+      console.log(serCountry);
       if (!serCountry) {
         allCountries.forEach(el => el.classList.remove('hidden'));
         return;
@@ -156,27 +156,15 @@ const searchbar = document.querySelector('.searchbar');
       serCountry.classList.remove('hidden');
     });
     filter.addEventListener('change', e => {
-      e.preventDefault();
-      const region = filter.value;
-      console.log(region);
-      const regionalCountries = data.filter(el => el.region === region);
-      countries.innerHTML = '';
-      regionalCountries.forEach((element, i) => {
-        const html = `
-        <div class="country" index=${index++}>
-        <img class="flag" src="${element.flag}" />
-        <p class="name">${element.name}</p>
-        <div class="info">
-        <p>Population: <span class="data">${element.population}</span></p>
-        <p>Region: <span class="data">${element.region}</span></p>
-        <p>Capital: <span class="data">${element.capital}</span></p>
-        </div>
-        </div>`;
-        countries.insertAdjacentHTML('beforeend', html);
-      });
-    });
+       e.preventDefault();
+       const region = filter.value;
+       const badCon = allCountries.filter(
+         el => el.getAttribute('region') !== region
+       );
+       allCountries.forEach(el => el.classList.remove('hidden'));
+       badCon.forEach(el => el.classList.add('hidden'));
+     });
   } catch (err) {
     console.error(err.message);
   }
 })();
-
